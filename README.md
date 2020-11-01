@@ -1,5 +1,24 @@
 ## 테스트
 ### Runner를 통해 user1, user2의 계정을 생성했다.  패스워드는 1234
+##### 아래 2개의 Bean 등록후 sessionManagement에 등록
+```shell
+http.sessionManagement()
+        .maximumSessions(1)
+        .sessionRegistry(sessionRegistry())
+
+@Bean
+public SessionRegistry sessionRegistry() {
+    return new SessionRegistryImpl();
+}
+
+@Bean
+public ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
+    return new ServletListenerRegistrationBean<>(new HttpSessionEventPublisher());
+}
+```
+
+
+
 * 브라우저 2개 준비 
   - http://localhost:8080 접속시 익명사용자 입니다. 출력
    
